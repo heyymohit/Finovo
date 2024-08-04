@@ -1,3 +1,9 @@
 exports.getTransactions = (req, res, next) => {
-    res.send('Get Transactions');
+    res.send('GET Transactions');
+}
+exports.addTransaction = (req, res, next) => {
+    res.send('POST Transactions');
+}
+exports.deleteTransaction = (req, res, next) => {
+    res.send('DELETE Transactions');
 }
