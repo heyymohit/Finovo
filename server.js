@@ -13,7 +13,7 @@ const transactions = require('./routes/transactions');
 
 const app = express();
 
-app.use(express.json());
+app.use(express.json()); //Middleware -> request body parser
 
 app.use('/api/v1/transactions', transactions);
 
