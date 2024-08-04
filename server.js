@@ -15,6 +15,10 @@ const app = express();
 
 app.use(express.json()); //Middleware -> request body parser
 
+if (process.env.NODE_ENV === 'development') {
+    app.use(morgan('dev'));    //dev gives the methods
+}
+
 app.use('/api/v1/transactions', transactions);
 
 const PORT = process.env.PORT || 5000;
