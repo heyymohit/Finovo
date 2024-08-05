@@ -4,6 +4,15 @@ const dotenv = require('dotenv');
 const colors = require('colors');
 const morgan = require('morgan');
 const connectDB = require('./config/db');
+const cors = require('cors');
+
+// Use CORS middleware
+app.use(cors({
+    origin: 'https://finovo-lac.vercel.app', // Allow only your Vercel frontend
+    // origin: '*' // Alternatively, allow requests from any origin
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true, // If you need to handle cookies or other credentials
+}));
 
 dotenv.config({ path: './config/config.env' });
 
