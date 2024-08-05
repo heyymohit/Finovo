@@ -2,38 +2,42 @@ import React, { createContext, useReducer } from 'react';
 import AppReducer from './AppReducer';
 import axios from 'axios';
 
-//Initial State
+// Initial State
 const initialState = {
     transactions: [],
-    error: null,    //take the error generated in the state. it can be helpful if needed later for example to give alerts
-    loading: true  //for the loading spinner 
+    error: null, // Take the error generated in the state. It can be helpful if needed later, for example, to give alerts.
+    loading: true // For the loading spinner
 };
 
-//Create context
+// Create context
 export const GlobalContext = createContext(initialState);
 
-//Provider component
+// Provider component
 export const GlobalProvider = ({ children }) => {
     const [state, dispatch] = useReducer(AppReducer, initialState);
 
-    //Actions
+    // Base URL for API calls
+    const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+
+    // Actions
     async function getTransactions() {
         try {
-            const res = await axios.get('/api/v1/transactions');  // full local host url is not need as for that proxy is added.
+            const res = await axios.get(`${apiUrl}/api/v1/transactions`);
             dispatch({
                 type: 'GET_TRANSACTIONS',
-                payload: res.data.data  //res.data gives the entire api object (success, count, data). res.data.data gives the data from the object
+                payload: res.data.data // res.data gives the entire API object (success, count, data). res.data.data gives the data from the object.
             });
         } catch (err) {
             dispatch({
                 type: 'TRANSACTION_ERROR',
-                payload: err.response.data.error
+                payload: err.response?.data.error || 'An error occurred'
             });
         }
     }
+
     async function deleteTransaction(id) {
         try {
-            await axios.delete(`/api/v1/transactions/${id}`);
+            await axios.delete(`${apiUrl}/api/v1/transactions/${id}`);
 
             dispatch({
                 type: 'DELETE_TRANSACTION',
@@ -42,18 +46,19 @@ export const GlobalProvider = ({ children }) => {
         } catch (err) {
             dispatch({
                 type: 'TRANSACTION_ERROR',
-                payload: err.response.data.error
+                payload: err.response?.data.error || 'An error occurred'
             });
         }
     }
+
     async function addTransaction(transaction) {
         const config = {
             headers: {
                 'Content-Type': 'application/json'
             }
-        }
+        };
         try {
-            const res = await axios.post('/api/v1/transactions', transaction, config);
+            const res = await axios.post(`${apiUrl}/api/v1/transactions`, transaction, config);
             dispatch({
                 type: 'ADD_TRANSACTION',
                 payload: res.data.data
@@ -61,11 +66,11 @@ export const GlobalProvider = ({ children }) => {
         } catch (err) {
             dispatch({
                 type: 'TRANSACTION_ERROR',
-                payload: err.response.data.error
+                payload: err.response?.data.error || 'An error occurred'
             });
         }
-
     }
+
     return (
         <GlobalContext.Provider value={{
             transactions: state.transactions,
@@ -78,5 +83,4 @@ export const GlobalProvider = ({ children }) => {
             {children}
         </GlobalContext.Provider>
     );
-
-}
+};
