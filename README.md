@@ -2,8 +2,6 @@
 
 Finovo is a straightforward yet powerful web application designed to help users track their expenses and manage their finances effectively. The application features a distraction-free user interface, enabling users to focus on their financial goals. Developed using the MERN stack, Finovo ensures a smooth and efficient user experience.
 
-![Finovo](assests/home.png)
-
 ## Features
 
 - **Intuitive User Interface**: Designed with simplicity in mind to avoid distractions and provide a seamless experience for users with minimal technical knowledge.
@@ -22,10 +20,6 @@ Finovo is a straightforward yet powerful web application designed to help users 
 - **CSS**: For styling the application.
 - **Git**: Version control for managing codebase changes.
 
-## Screenshots
-Here are some key screenshots of the Finovo app to give you a glimpse of its features:
-
-![Transactions Page](assests/delete_transaction.png)
 
 ## Installation
 
