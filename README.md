@@ -26,10 +26,6 @@ Finovo is a straightforward yet powerful web application designed to help users 
 Here are some key screenshots of the Finovo app to give you a glimpse of its features:
 
 ![Transactions Page](assests/delete_transaction.png)
-*Transactions Page*
-
-![Add Transaction](assests/add_transaction.png)
-*Add Transaction*
 
 ## Installation
 
